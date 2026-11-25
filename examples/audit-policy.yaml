@@ -1,0 +1,31 @@
+# Sample Audit Policy Configuration (JSON or YAML supported)
+thresholds:
+  default_region: us-east-1
+  max_access_key_age_days: 90
+  critical_access_key_age_days: 180
+  unused_access_key_days: 90
+  min_password_length: 14
+  max_password_age_days: 90
+  max_snapshot_age_days: 90
+  long_stopped_instance_days: 30
+  max_workers: 8
+
+# Override or extend sensitive ports inspected in Security Group ingress rules
+sensitive_ports:
+  22: ["SSH", "CRITICAL"]
+  3389: ["RDP", "CRITICAL"]
+  5432: ["PostgreSQL", "HIGH"]
+  6379: ["Redis", "HIGH"]
+  9200: ["Elasticsearch", "HIGH"]
+
+# Override regional EBS storage pricing (USD per GB-month) if needed
+ebs_monthly_rate_per_gb:
+  gp3: 0.08
+  gp2: 0.10
+  io1: 0.125
+  io2: 0.125
+  st1: 0.045
+  sc1: 0.015
+
+# Optionally disable rules outside your environment scope
+disabled_rules: []

@@ -1,0 +1,12 @@
+# Risk-acceptance waivers for verified exceptions (expired waivers auto-reopen)
+suppressions:
+  - rule_id: "SEC-STG-001"
+    resource_pattern: "^acme-public-cdn-assets$"
+    region: "us-east-1"
+    reason: "Intentional static public website bucket fronted by CloudFront OAC"
+    expires_at: "2027-06-30"
+
+  - rule_id: "FIN-EBS-003"
+    resource_pattern: "^snap-0compliance"
+    reason: "Annual regulatory archival snapshot retained per data retention schedule"
+    expires_at: "2027-12-31"

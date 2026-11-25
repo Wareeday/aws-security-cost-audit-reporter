@@ -1,0 +1,5 @@
+# Core offline demo/snapshot mode requires Python 3.10+ standard library only.
+# Live AWS auditing (`--mode aws`) requires boto3:
+boto3>=1.35.0
+# YAML policy/waiver config files (JSON configs work without extra packages):
+PyYAML>=6.0

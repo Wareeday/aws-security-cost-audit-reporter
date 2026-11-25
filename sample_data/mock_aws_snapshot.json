@@ -1,0 +1,218 @@
+{
+  "schema_version": "2.0",
+  "account_id": "123456789012",
+  "account_alias": "acme-cloud-prod-demo",
+  "regions": [
+    "us-east-1",
+    "eu-central-1"
+  ],
+  "collected_at": "2026-11-25T06:55:00Z",
+  "collector_mode": "demo",
+  "iam_summary": {
+    "root_mfa_enabled": true,
+    "root_access_keys_present": false,
+    "password_policy": {
+      "exists": true,
+      "minimum_password_length": 10,
+      "require_symbols": true,
+      "require_numbers": true,
+      "require_uppercase": true,
+      "require_lowercase": true,
+      "max_password_age": 120,
+      "password_reuse_prevention": 12
+    }
+  },
+  "security_groups": [
+    {
+      "group_id": "sg-0a1b2c3d4e5f00001",
+      "group_name": "prod-web-sg",
+      "region": "us-east-1",
+      "vpc_id": "vpc-0prod111122223333",
+      "is_default": false,
+      "rules": [
+        {"from_port": 443, "to_port": 443, "protocol": "tcp", "cidrs": ["0.0.0.0/0"]},
+        {"from_port": 22, "to_port": 22, "protocol": "tcp", "cidrs": ["0.0.0.0/0"]}
+      ],
+      "egress_rules": []
+    },
+    {
+      "group_id": "sg-0a1b2c3d4e5f00002",
+      "group_name": "staging-db-sg",
+      "region": "us-east-1",
+      "vpc_id": "vpc-0prod111122223333",
+      "is_default": false,
+      "rules": [
+        {"from_port": 5432, "to_port": 5432, "protocol": "tcp", "cidrs": ["0.0.0.0/0"]}
+      ],
+      "egress_rules": []
+    },
+    {
+      "group_id": "sg-0default99998888",
+      "group_name": "default",
+      "region": "eu-central-1",
+      "vpc_id": "vpc-0eu444455556666",
+      "is_default": true,
+      "rules": [
+        {"from_port": -1, "to_port": -1, "protocol": "-1", "cidrs": ["10.0.0.0/16"]}
+      ],
+      "egress_rules": [
+        {"from_port": -1, "to_port": -1, "protocol": "-1", "cidrs": ["0.0.0.0/0"]}
+      ]
+    }
+  ],
+  "iam_users": [
+    {
+      "username": "devops-admin",
+      "has_console_access": true,
+      "has_mfa": false,
+      "attached_policies": ["AdministratorAccess"],
+      "inline_policies": [],
+      "access_keys": [
+        {"access_key_id": "AKIAEXAMPLE11111", "status": "Active", "age_days": 142, "last_used_days": 4}
+      ]
+    },
+    {
+      "username": "ci-deployer",
+      "has_console_access": false,
+      "has_mfa": false,
+      "attached_policies": ["AmazonECS_FullAccess"],
+      "inline_policies": [],
+      "access_keys": [
+        {"access_key_id": "AKIAEXAMPLE22222", "status": "Active", "age_days": 25, "last_used_days": 1}
+      ]
+    },
+    {
+      "username": "legacy-svc-user",
+      "has_console_access": false,
+      "has_mfa": false,
+      "attached_policies": ["ReadOnlyAccess"],
+      "inline_policies": [],
+      "access_keys": [
+        {"access_key_id": "AKIAEXAMPLE33333", "status": "Active", "age_days": 110, "last_used_days": 105}
+      ]
+    }
+  ],
+  "s3_buckets": [
+    {
+      "name": "acme-prod-backups-2026",
+      "region": "us-east-1",
+      "public_access_blocked": true,
+      "encryption_enabled": true,
+      "versioning_enabled": true
+    },
+    {
+      "name": "acme-temp-exports-demo",
+      "region": "us-east-1",
+      "public_access_blocked": false,
+      "encryption_enabled": false,
+      "versioning_enabled": false
+    }
+  ],
+  "ebs_volumes": [
+    {
+      "volume_id": "vol-0123456789abcdef0",
+      "region": "us-east-1",
+      "volume_type": "gp3",
+      "size_gb": 250,
+      "state": "available",
+      "encrypted": true,
+      "age_days": 42
+    },
+    {
+      "volume_id": "vol-0123456789abcdef1",
+      "region": "us-east-1",
+      "volume_type": "gp2",
+      "size_gb": 100,
+      "state": "available",
+      "encrypted": false,
+      "age_days": 68
+    },
+    {
+      "volume_id": "vol-0inusegp20000002",
+      "region": "eu-central-1",
+      "volume_type": "gp2",
+      "size_gb": 500,
+      "state": "in-use",
+      "encrypted": true,
+      "age_days": 210
+    },
+    {
+      "volume_id": "vol-0stoppedvm000003",
+      "region": "us-east-1",
+      "volume_type": "gp3",
+      "size_gb": 150,
+      "state": "in-use",
+      "encrypted": true,
+      "age_days": 95
+    }
+  ],
+  "ebs_snapshots": [
+    {
+      "snapshot_id": "snap-0987654321fedcba0",
+      "region": "us-east-1",
+      "volume_size_gb": 200,
+      "age_days": 185,
+      "encrypted": true,
+      "ami_referenced": false
+    },
+    {
+      "snapshot_id": "snap-0987654321fedcba1",
+      "region": "us-east-1",
+      "volume_size_gb": 80,
+      "age_days": 14,
+      "encrypted": true,
+      "ami_referenced": true
+    }
+  ],
+  "elastic_ips": [
+    {"allocation_id": "eipalloc-00112233", "public_ip": "198.51.100.24", "region": "us-east-1", "associated": false},
+    {"allocation_id": "eipalloc-44556677", "public_ip": "198.51.100.88", "region": "eu-central-1", "associated": true}
+  ],
+  "ec2_instances": [
+    {
+      "instance_id": "i-0prodweb000000001",
+      "name": "prod-api-node",
+      "region": "us-east-1",
+      "instance_type": "m6i.large",
+      "state": "running",
+      "public_ip": "203.0.113.15",
+      "imdsv2_required": false,
+      "stopped_days": 0,
+      "attached_volumes": []
+    },
+    {
+      "instance_id": "i-0legacy000000002",
+      "name": "decommissioned-worker",
+      "region": "us-east-1",
+      "instance_type": "t3.xlarge",
+      "state": "stopped",
+      "public_ip": null,
+      "imdsv2_required": true,
+      "stopped_days": 64,
+      "attached_volumes": [
+        {"volume_id": "vol-0stoppedvm000003", "volume_type": "gp3", "size_gb": 150}
+      ]
+    }
+  ],
+  "vpcs": [
+    {"vpc_id": "vpc-0prod111122223333", "region": "us-east-1", "cidr_block": "10.0.0.0/16", "is_default": false, "flow_logs_enabled": true},
+    {"vpc_id": "vpc-0eu444455556666", "region": "eu-central-1", "cidr_block": "172.31.0.0/16", "is_default": true, "flow_logs_enabled": false}
+  ],
+  "nat_gateways": [
+    {"nat_gateway_id": "nat-0unused11223344", "region": "eu-central-1", "state": "available", "idle": true, "bytes_7d": 0},
+    {"nat_gateway_id": "nat-0active55667788", "region": "us-east-1", "state": "available", "idle": false, "bytes_7d": 982341120}
+  ],
+  "load_balancers": [
+    {"arn": "arn:aws:elasticloadbalancing:eu-central-1:123456789012:loadbalancer/app/staging-legacy-alb/12345678", "name": "staging-legacy-alb", "type": "application", "region": "eu-central-1", "target_count": 0}
+  ],
+  "rds_instances": [
+    {"db_instance_id": "prod-analytics-pg", "engine": "postgres", "region": "us-east-1", "publicly_accessible": true, "storage_encrypted": false}
+  ],
+  "cloudtrail_trails": [
+    {"name": "org-security-trail", "region": "us-east-1", "is_multi_region": true, "is_logging": true, "log_file_validation_enabled": false}
+  ],
+  "log_groups": [
+    {"name": "/aws/lambda/legacy-etl-worker", "region": "us-east-1", "retention_days": null, "stored_bytes": 107374182400},
+    {"name": "/aws/ecs/prod-api", "region": "us-east-1", "retention_days": 90, "stored_bytes": 16106127360}
+  ]
+}

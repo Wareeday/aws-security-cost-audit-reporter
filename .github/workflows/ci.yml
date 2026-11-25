@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  test-and-audit-smoke:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[yaml,dev]"
+
+      - name: Run test suite
+        run: pytest
+
+      - name: Run CLI smoke test and verify multi-format outputs
+        run: |
+          aws-audit --mode demo --formats all --output-dir output-ci --waivers examples/waivers.yaml
+          test -s output-ci/aws_audit_report.md
+          test -s output-ci/aws_audit_report.html
+          test -s output-ci/findings.csv
+          test -s output-ci/aws_audit_report.json
+          test -s output-ci/findings.sarif
+          set +e
+          aws-audit --mode demo --fail-on CRITICAL --output-dir output-ci
+          status=$?
+          set -e
+          test "$status" -eq 2
